@@ -770,15 +770,26 @@
     .domain-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       border-radius: 100px;
-      padding: 3px 10px;
+      padding: 4px 12px 4px 6px;
       margin-bottom: 8px;
       font-size: clamp(9px, 1.2vw, 11.5px);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       width: fit-content;
+    }
+
+    .domain-badge-logo {
+      width: clamp(28px, 3vw, 36px);
+      height: clamp(28px, 3vw, 36px);
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      background: white;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
 
     .domain-badge .dot {
@@ -837,6 +848,20 @@
       color: inherit;
       text-decoration: none;
       transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .domain-club-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1.5px solid var(--border-color);
+      background: white;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
 
     .domain-club a:hover {
@@ -1587,10 +1612,12 @@
       <div class="domain-matrix-wrap">
         <!-- Top Left: Operations -->
         <article class="domain-quadrant ops">
-          <div class="domain-badge"><span class="dot"></span>Operations</div>
+          <div class="domain-badge">
+            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGQ0NMg3G1KFQ/company-logo_200_200/B4DaB1kn3tI8AE-/0/1788678930277?e=1791417600&v=beta&t=Wjwq16cxvBoEGYPsUzHiLWjbGWLxt0LTnNBACJELK6g" alt="Optimus" class="domain-badge-logo">
+            <span class="dot"></span>Operations
+          </div>
           <div class="domain-club"><a href="https://management.nirmauni.ac.in/student/optimus/" target="_blank"
-              rel="noopener noreferrer" title="Optimus - The Operations Club of IMNU">Optimus &middot; The Operations
-              Club &nearr;</a></div>
+              rel="noopener noreferrer" title="Optimus - The Operations Club of IMNU">Optimus &middot; The Operations Club &nearr;</a></div>
           <h3 class="domain-title">Digitalising Operations for Competitive Leadership</h3>
           <p class="domain-desc">Transitioning from traditional supply chains to digitally integrated ecosystems:
             embedding smart automation, advanced analytics and data-driven intelligence into core operations.</p>
@@ -1604,10 +1631,12 @@
 
         <!-- Top Right: Marketing -->
         <article class="domain-quadrant mkt">
-          <div class="domain-badge"><span class="dot"></span>Marketing</div>
+          <div class="domain-badge">
+            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGvJzz8JtE1DQ/company-logo_200_200/B4DZdtv7zNHMAI-/0/1749892972246?e=1791417600&v=beta&t=ZlD0gaCBriSTFQHBTWCCbeSrGCFxkEeRY-nZACslSjM" alt="Niche" class="domain-badge-logo">
+            <span class="dot"></span>Marketing
+          </div>
           <div class="domain-club"><a href="https://management.nirmauni.ac.in/student/niche/" target="_blank"
-              rel="noopener noreferrer" title="Niche - The Marketing Club of IMNU">Niche &middot; The Marketing Club
-              &nearr;</a></div>
+              rel="noopener noreferrer" title="Niche - The Marketing Club of IMNU">Niche &middot; The Marketing Club &nearr;</a></div>
           <h3 class="domain-title">Achieving Leadership through Technology-Driven Marketing</h3>
           <p class="domain-desc">Leveraging digital innovation, AI-powered insights, and analytics to build enduring
             brands, enhance consumer trust, and position India as a global marketing powerhouse.</p>
@@ -1621,10 +1650,12 @@
 
         <!-- Bottom Left: Finance -->
         <article class="domain-quadrant fin">
-          <div class="domain-badge"><span class="dot"></span>Finance</div>
+          <div class="domain-badge">
+            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQE_yRiiKGozkQ/img-crop_100/B4DZazyCNKGYAM-/0/1746772961629?e=1791417600&v=beta&t=nLyt8JCXOWAQe5PbX3uB1rxUHLPDjv9cBrKVgyn1PNA" alt="Finesse" class="domain-badge-logo">
+            <span class="dot"></span>Finance
+          </div>
           <div class="domain-club"><a href="https://management.nirmauni.ac.in/student/finesse/" target="_blank"
-              rel="noopener noreferrer" title="Finesse - The Finance Club of IMNU">Finesse &middot; The Finance Club
-              &nearr;</a></div>
+              rel="noopener noreferrer" title="Finesse - The Finance Club of IMNU">Finesse &middot; The Finance Club &nearr;</a></div>
           <h3 class="domain-title">Financial Leadership in the Era of Intelligent Enterprises</h3>
           <p class="domain-desc">Finance as a strategic catalyst: harnessing AI, advanced analytics, and intelligent
             automation to transform financial planning, capital allocation, and enterprise governance.</p>
@@ -1638,10 +1669,12 @@
 
         <!-- Bottom Right: HR -->
         <article class="domain-quadrant hr">
-          <div class="domain-badge"><span class="dot"></span>Human Resources</div>
-          <div class="domain-club"><a href="https://management.nirmauni.ac.in/student/imprintz/" target="_blank"
-              rel="noopener noreferrer" title="Imprintz - The HR Club of IMNU">Imprintz &middot; The HR Club &nearr;</a>
+          <div class="domain-badge">
+            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQHKqDBJn0esmg/company-logo_200_200/company-logo_200_200/0/1633385435855/imprintz_the_hr_club_of_imnu_logo?e=1791417600&v=beta&t=N_pBh0mUx2ryh-TuiKl77m7LfzPchUix49tJNaGeMwY" alt="Imprintz" class="domain-badge-logo">
+            <span class="dot"></span>Human Resources
           </div>
+          <div class="domain-club"><a href="https://management.nirmauni.ac.in/student/imprintz/" target="_blank"
+              rel="noopener noreferrer" title="Imprintz - The HR Club of IMNU">Imprintz &middot; The HR Club &nearr;</a></div>
           <h3 class="domain-title">Reimagining the Workforce for a Tech-Enabled World</h3>
           <p class="domain-desc">Balancing technological transformation with human-centric leadership: fostering
             adaptability, continuous learning, employee engagement, and ethical technology adoption.</p>
@@ -1658,10 +1691,11 @@
           class="clique-hub" aria-label="Clique: IT and Analytics Club of IMNU"
           title="Clique - The IT and Analytics Club of IMNU">
           <div class="clique-hub-inner">
-            <span class="clique-hub-pill">IT &amp; Analytics</span>
-            <div class="clique-hub-name">CLIQUE &nearr;</div>
-            <div class="clique-hub-sub">The IT Club</div>
-            <div class="clique-hub-desc">Digital &amp; Analytics</div>
+            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHs3gFzvt2fxw/company-logo_100_100/company-logo_100_100/0/1714108100335?e=1791417600&v=beta&t=pNc2PeennGAVHtLK7JaauJCcolpbgGrgo78lpbDoQo4"
+              alt="Clique"
+              style="width:clamp(52px,7vw,88px);height:clamp(52px,7vw,88px);border-radius:50%;object-fit:cover;border:2.5px solid rgba(255,255,255,0.4);margin-bottom:6px;box-shadow:0 2px 12px rgba(0,0,0,0.28);">
+            <div class="clique-hub-sub" style="margin-top:0;">IT &amp; Analytics</div>
+            <div class="clique-hub-desc">The IT Club of IMNU</div>
           </div>
         </a>
       </div>
