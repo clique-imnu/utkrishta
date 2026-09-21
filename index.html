@@ -1910,13 +1910,17 @@
     </div>
   </header>
 
-  <!-- Visit Counter (fixed floating badge, bottom-right) -->
-  <div class="visit-counter-pill" title="Total page visits" role="status" aria-live="polite">
+  <!-- Visit Counter (fixed floating badge, bottom-right via visitorbadge.io) -->
+  <a href="https://visitorbadge.io/status?path=clique-imnu%2Futkrishta"
+     target="_blank" rel="noopener noreferrer"
+     title="Total page visitors" class="visit-counter-pill">
     <span class="visit-counter-dot"></span>
-    <span class="visit-counter-icon" style="font-size:14px;">👁</span>
-    <span id="visit-count" class="visit-counter-num">—</span>
-    <span class="visit-counter-label">visits</span>
-  </div>
+    <img
+      src="https://api.visitorbadge.io/api/visitors?path=clique-imnu%2Futkrishta&label=Visitors&countColor=%23C9963A&labelColor=%230e323a&style=flat"
+      alt="Visitor count"
+      style="height:20px;border-radius:4px;display:block;"
+      loading="lazy">
+  </a>
 
   <!-- ABOUT SECTION -->
   <section class="section" id="about">
@@ -2428,47 +2432,7 @@
     })();
   </script>
 
-  <!-- Visit Counter Script -->
-  <script>
-    (function () {
-      const el = document.getElementById('visit-count');
-      if (!el) return;
 
-      // Animate number from 0 to target
-      function animateCount(target) {
-        const duration = 1200;
-        const start = performance.now();
-        const from = 0;
-        function step(now) {
-          const progress = Math.min((now - start) / duration, 1);
-          const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-          el.textContent = Math.floor(from + (target - from) * ease).toLocaleString();
-          el.style.animation = 'count-up 0.4s ease';
-          if (progress < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      }
-
-      // CountAPI — unique namespace for this live deployment
-      const namespace = 'clique-imnu-github-utkrishta26';
-      const key = 'pagevisits';
-      fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-        .then(r => r.json())
-        .then(data => {
-          if (data && typeof data.value === 'number') {
-            animateCount(data.value);
-          } else {
-            throw new Error('bad response');
-          }
-        })
-        .catch(() => {
-          // Fallback: localStorage-based counter
-          const stored = parseInt(localStorage.getItem('utkrishta26_visits') || '0', 10) + 1;
-          localStorage.setItem('utkrishta26_visits', stored);
-          animateCount(stored);
-        });
-    })();
-  </script>
 </body>
 
 </html>
