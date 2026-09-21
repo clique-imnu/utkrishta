@@ -11,7 +11,7 @@
     content="Utkrishta 2026, Utkrishta '26, Management Conclave, Nirma University, IMNU, Viksit Bharat 2047, India Inc, MBA conclave, Ahmedabad, business summit, IMNU events">
   <meta name="author" content="Institute of Management, Nirma University">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <link rel="canonical" href="https://management.nirmauni.ac.in/news-events/utkrishta-2026-towards-viksit-bharat-2047/">
+  <link rel="canonical" href="https://clique-imnu.github.io/utkrishta/">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:locale" content="en_US">
@@ -20,7 +20,7 @@
   <meta property="og:description"
     content="Join India Inc's leaders at IMNU's flagship Management Conclave, October 8–9, 2026. Theme: Towards Viksit Bharat 2047: India Inc's Pivotal Role.">
   <meta property="og:url"
-    content="https://management.nirmauni.ac.in/news-events/utkrishta-2026-towards-viksit-bharat-2047/">
+    content="https://clique-imnu.github.io/utkrishta/">
   <meta property="og:site_name" content="Institute of Management, Nirma University">
   <meta property="og:image"
     content="https://nirmawebsite.s3.ap-south-1.amazonaws.com/wp-content/uploads/sites/24/2022/04/Management_01.jpg">
@@ -987,6 +987,92 @@
       max-width: 90%;
     }
 
+    .hero-subtitle {
+      font-size: clamp(13px, 1.8vw, 17px);
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 18px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Visit Counter (fixed right-side floating badge) ── */
+    .visit-counter-pill {
+      position: fixed;
+      right: 20px;
+      bottom: 28px;
+      z-index: 9000;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(14, 50, 58, 0.92);
+      border: 1.5px solid rgba(201, 150, 58, 0.7);
+      border-radius: 100px;
+      padding: 7px 16px 7px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .visit-counter-pill:hover {
+      border-color: rgba(201, 150, 58, 1);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+      transform: translateY(-2px);
+    }
+    .visit-counter-label {
+      opacity: 0.75;
+      font-size: 11px;
+    }
+    /* Mobile: icon + number only, very compact */
+    @media (max-width: 768px) {
+      .visit-counter-pill {
+        right: 12px;
+        bottom: 16px;
+        padding: 5px 10px 5px 8px;
+        gap: 5px;
+        font-size: 11px;
+        border-width: 1px;
+      }
+      .visit-counter-label {
+        display: none;
+      }
+      .visit-counter-icon {
+        font-size: 12px !important;
+      }
+    }
+    .visit-counter-icon {
+      font-size: 15px;
+      opacity: 0.9;
+    }
+    .visit-counter-num {
+      color: var(--gold-light);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      min-width: 2ch;
+    }
+    .visit-counter-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.3);
+      animation: pulse-dot 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(74,222,128,0.3); }
+      50%       { box-shadow: 0 0 0 5px rgba(74,222,128,0.1); }
+    }
+    @keyframes count-up {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
     /* Schedule Tabs */
     .schedule-tabs {
       display: flex;
@@ -1824,6 +1910,14 @@
     </div>
   </header>
 
+  <!-- Visit Counter (fixed floating badge, bottom-right) -->
+  <div class="visit-counter-pill" title="Total page visits" role="status" aria-live="polite">
+    <span class="visit-counter-dot"></span>
+    <span class="visit-counter-icon" style="font-size:14px;">👁</span>
+    <span id="visit-count" class="visit-counter-num">—</span>
+    <span class="visit-counter-label">visits</span>
+  </div>
+
   <!-- ABOUT SECTION -->
   <section class="section" id="about">
     <div class="container">
@@ -2331,6 +2425,48 @@
           toggle.setAttribute('aria-expanded', 'false');
         }
       });
+    })();
+  </script>
+
+  <!-- Visit Counter Script -->
+  <script>
+    (function () {
+      const el = document.getElementById('visit-count');
+      if (!el) return;
+
+      // Animate number from 0 to target
+      function animateCount(target) {
+        const duration = 1200;
+        const start = performance.now();
+        const from = 0;
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+          el.textContent = Math.floor(from + (target - from) * ease).toLocaleString();
+          el.style.animation = 'count-up 0.4s ease';
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      // CountAPI — unique namespace for this live deployment
+      const namespace = 'clique-imnu-github-utkrishta26';
+      const key = 'pagevisits';
+      fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+        .then(r => r.json())
+        .then(data => {
+          if (data && typeof data.value === 'number') {
+            animateCount(data.value);
+          } else {
+            throw new Error('bad response');
+          }
+        })
+        .catch(() => {
+          // Fallback: localStorage-based counter
+          const stored = parseInt(localStorage.getItem('utkrishta26_visits') || '0', 10) + 1;
+          localStorage.setItem('utkrishta26_visits', stored);
+          animateCount(stored);
+        });
     })();
   </script>
 </body>
