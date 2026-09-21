@@ -579,7 +579,7 @@
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
-      border: 1px solid rgba(255,255,255,0.25);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       background: white;
     }
 
@@ -787,9 +787,9 @@
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
-      border: 1.5px solid rgba(255,255,255,0.6);
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
       background: white;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
 
     .domain-badge .dot {
@@ -861,7 +861,7 @@
       flex-shrink: 0;
       border: 1.5px solid var(--border-color);
       background: white;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
 
     .domain-club a:hover {
@@ -1333,21 +1333,67 @@
       color: #ffffff;
     }
 
-    /* Responsive Queries */
-    @media (max-width: 992px) {
-      .header-container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    /* ── Hamburger Button ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      padding: 8px;
+      flex-shrink: 0;
+      transition: border-color 0.2s ease;
+    }
 
-      .nav-menu {
-        width: 100%;
-        justify-content: flex-start;
+    .nav-toggle:hover {
+      border-color: var(--nirma-blue);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--text-dark);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── Responsive Queries ── */
+
+    /* Tablet */
+    @media (max-width: 992px) {
+      .hero {
+        min-height: auto;
+        padding: 48px 0 40px;
       }
 
       .hero-grid,
       .about-grid {
         grid-template-columns: 1fr;
+      }
+
+      .hero-card-side {
+        display: none;
+        /* hide clubs card on tablet/mobile to reduce clutter */
       }
 
       .theme-pillars-grid {
@@ -1359,11 +1405,233 @@
       }
     }
 
-    @media (max-width: 600px) {
+    /* Mobile */
+    @media (max-width: 768px) {
 
-      .theme-pillars-grid,
-      .footer-columns {
+      /* — Header — */
+      .header-container {
+        padding: 10px 16px;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .logo-wrap img.desktop_logo {
+        height: 40px;
+      }
+
+      /* Hide accreditation badges on mobile */
+      .header-badges {
+        display: none;
+      }
+
+      /* Show hamburger */
+      .nav-toggle {
+        display: flex;
+      }
+
+      /* Slide-down nav drawer */
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #ffffff;
+        border-top: 1px solid #eaedf3;
+        padding: 8px 0 12px;
+        gap: 2px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .nav-menu li {
+        width: 100%;
+      }
+
+      .nav-menu li a {
+        display: block;
+        padding: 11px 20px;
+        font-size: 15px;
+        border-radius: 0;
+        border-left: 3px solid transparent;
+      }
+
+      .nav-menu li a:hover {
+        border-left-color: var(--nirma-blue);
+        background: #f0f4f9;
+      }
+
+      /* Breadcrumb condensed */
+      .nri-breadcrumb {
+        font-size: 12px;
+        padding: 8px 0;
+      }
+
+      .nri-breadcrumb .container {
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+
+      /* — Hero Section — */
+      .hero {
+        min-height: auto;
+        padding: 40px 0 36px;
+      }
+
+      .hero-title {
+        white-space: normal;
+        font-size: clamp(28px, 8vw, 40px);
+        letter-spacing: -0.5px;
+      }
+
+      .hero-title img {
+        max-height: 80px !important;
+      }
+
+      .hero-subtitle {
+        font-size: 11.5px;
+        letter-spacing: 1.5px;
+        margin-bottom: 16px;
+      }
+
+      .hero-theme-box h3 {
+        font-size: clamp(16px, 4.5vw, 20px);
+      }
+
+      .hero-meta-bar {
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .hero-meta-item {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        font-size: 14px;
+        padding: 11px 22px;
+      }
+
+      /* hero buttons stack nicely on very small widths */
+      .hero-left>div[style] {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px !important;
+      }
+
+      .hero-card-side {
+        display: none;
+      }
+
+      /* — Section spacing — */
+      .section {
+        padding: 48px 0;
+      }
+
+      .section-title {
+        font-size: clamp(22px, 6vw, 30px);
+      }
+
+      .section-sub {
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+
+      /* — Domains matrix — */
+      .domain-matrix-wrap {
         grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+
+      .domain-quadrant.ops,
+      .domain-quadrant.mkt,
+      .domain-quadrant.fin,
+      .domain-quadrant.hr {
+        border-radius: 0;
+        border-top: 4px solid;
+        border-right: none;
+        border-bottom: 1px solid #E8EEF5;
+        padding: 18px 16px;
+      }
+
+      .domain-quadrant.ops {
+        border-top-color: #3F6293;
+        border-radius: var(--radius) var(--radius) 0 0;
+      }
+
+      .domain-quadrant.mkt {
+        border-top-color: #C9963A;
+      }
+
+      .domain-quadrant.fin {
+        border-top-color: #2A6B4D;
+      }
+
+      .domain-quadrant.hr {
+        border-top-color: #7B3FA0;
+        border-radius: 0 0 var(--radius) var(--radius);
+        border-bottom: 4px solid #7B3FA0;
+      }
+
+      .domain-desc,
+      .domain-keys {
+        display: block;
+        /* show on mobile since we have full-width cards */
+      }
+
+      .clique-hub {
+        position: static;
+        transform: none;
+        width: 100%;
+        height: auto;
+        border-radius: var(--radius);
+        margin: 12px 0;
+        padding: 20px;
+      }
+
+      .clique-hub:hover {
+        transform: none;
+      }
+
+      .clique-hub-inner {
+        flex-direction: row;
+        gap: 12px;
+        padding: 0;
+        text-align: left;
+        align-items: center;
+      }
+
+      .clique-hub-name {
+        font-size: 22px;
+      }
+
+      .clique-hub-desc {
+        font-size: 11px;
+        max-width: 100%;
+      }
+
+      /* — Schedule — */
+      .schedule-tabs {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .tab-btn {
+        flex: 1;
+        text-align: center;
+        font-size: 13px;
+        padding: 8px 12px;
       }
 
       .sched-item {
@@ -1373,12 +1641,46 @@
       .sched-time {
         border-right: none;
         border-bottom: 2px solid var(--gold);
+        font-size: 12px;
+        padding: 10px 16px;
       }
 
-      /* On very small screens hide description text inside quadrants */
-      .domain-desc,
-      .domain-keys {
-        display: none;
+      .sched-body {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 16px;
+      }
+
+      /* — Footer — */
+      .theme-pillars-grid,
+      .footer-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .social-newsletter-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .newsletter-form-box input {
+        width: 180px;
+      }
+    }
+
+    /* Very small phones */
+    @media (max-width: 380px) {
+      .hero-title img {
+        max-height: 64px !important;
+      }
+
+      .hero-meta-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .logo-wrap img.desktop_logo {
+        height: 34px;
       }
     }
   </style>
@@ -1394,7 +1696,7 @@
           src="https://nirmawebsite.s3.ap-south-1.amazonaws.com/wp-content/uploads/sites/24/2022/04/Management_01.jpg"
           class="desktop_logo" alt="Institute of Management, Nirma University Logo">
       </a>
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="main-nav">
         <li><a href="#about">About</a></li>
         <li><a href="#theme">Theme</a></li>
         <li><a href="#domains">Domains</a></li>
@@ -1416,6 +1718,13 @@
             alt="AACSB Member" style="height:34px;width:auto;object-fit:contain;">
         </a>
       </div>
+      <!-- Mobile hamburger -->
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"
+        aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -1444,8 +1753,8 @@
               <img src="assets/utkrishta_logo_crop.png" alt="UTKRISHTA '26 – The Management Conclave 2026"
                 style="max-height:110px;width:auto;max-width:100%;object-fit:contain;display:block;" />
             </h1>
+            <p class="hero-subtitle"></p>
 
-          
             <div class="hero-theme-box">
               <h3>TOWARDS <em>VIKSIT BHARAT</em> 2047:<br>India Inc&rsquo;s Pivotal Role</h3>
               <p>October 8th &amp; 9th, 2026 &middot; Ahmedabad, Gujarat</p>
@@ -1458,8 +1767,8 @@
             </div>
 
             <div style="display:flex; gap:14px; flex-wrap:wrap;">
-              <a href="assets/UTKRISHTA-26-Brochure.pdf"
-                target="_blank" rel="noopener noreferrer" class="btn-primary">Download Brochure (PDF)</a>
+              <a href="assets/UTKRISHTA-26-Brochure.pdf" target="_blank" rel="noopener noreferrer"
+                class="btn-primary">Download Brochure (PDF)</a>
               <a href="#about" class="btn-secondary">Explore Conclave &darr;</a>
             </div>
           </div>
@@ -1470,27 +1779,37 @@
               <div class="clubs-banner-list">
                 <a href="https://management.nirmauni.ac.in/student/niche/" target="_blank" rel="noopener noreferrer"
                   class="club-chip" title="Niche - The Marketing Club of IMNU">
-                  <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGvJzz8JtE1DQ/company-logo_200_200/B4DZdtv7zNHMAI-/0/1749892972246?e=1791417600&v=beta&t=ZlD0gaCBriSTFQHBTWCCbeSrGCFxkEeRY-nZACslSjM" alt="Niche" class="club-chip-logo">
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/D4D0BAQGvJzz8JtE1DQ/company-logo_200_200/B4DZdtv7zNHMAI-/0/1749892972246?e=1791417600&v=beta&t=ZlD0gaCBriSTFQHBTWCCbeSrGCFxkEeRY-nZACslSjM"
+                    alt="Niche" class="club-chip-logo">
                   <strong>Niche</strong>&thinsp;Marketing
                 </a>
                 <a href="https://management.nirmauni.ac.in/student/imprintz/" target="_blank" rel="noopener noreferrer"
                   class="club-chip" title="Imprintz - The HR Club of IMNU">
-                  <img src="https://media.licdn.com/dms/image/v2/C4E0BAQHKqDBJn0esmg/company-logo_200_200/company-logo_200_200/0/1633385435855/imprintz_the_hr_club_of_imnu_logo?e=1791417600&v=beta&t=N_pBh0mUx2ryh-TuiKl77m7LfzPchUix49tJNaGeMwY" alt="Imprintz" class="club-chip-logo">
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/C4E0BAQHKqDBJn0esmg/company-logo_200_200/company-logo_200_200/0/1633385435855/imprintz_the_hr_club_of_imnu_logo?e=1791417600&v=beta&t=N_pBh0mUx2ryh-TuiKl77m7LfzPchUix49tJNaGeMwY"
+                    alt="Imprintz" class="club-chip-logo">
                   <strong>Imprintz</strong>&thinsp;HR
                 </a>
                 <a href="https://management.nirmauni.ac.in/student/optimus/" target="_blank" rel="noopener noreferrer"
                   class="club-chip" title="Optimus - The Operations Club of IMNU">
-                  <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGQ0NMg3G1KFQ/company-logo_200_200/B4DaB1kn3tI8AE-/0/1788678930277?e=1791417600&v=beta&t=Wjwq16cxvBoEGYPsUzHiLWjbGWLxt0LTnNBACJELK6g" alt="Optimus" class="club-chip-logo">
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/D4D0BAQGQ0NMg3G1KFQ/company-logo_200_200/B4DaB1kn3tI8AE-/0/1788678930277?e=1791417600&v=beta&t=Wjwq16cxvBoEGYPsUzHiLWjbGWLxt0LTnNBACJELK6g"
+                    alt="Optimus" class="club-chip-logo">
                   <strong>Optimus</strong>&thinsp;Operations
                 </a>
                 <a href="https://management.nirmauni.ac.in/student/finesse/" target="_blank" rel="noopener noreferrer"
                   class="club-chip" title="Finesse - The Finance Club of IMNU">
-                  <img src="https://media.licdn.com/dms/image/v2/D4D0BAQE_yRiiKGozkQ/img-crop_100/B4DZazyCNKGYAM-/0/1746772961629?e=1791417600&v=beta&t=nLyt8JCXOWAQe5PbX3uB1rxUHLPDjv9cBrKVgyn1PNA" alt="Finesse" class="club-chip-logo">
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/D4D0BAQE_yRiiKGozkQ/img-crop_100/B4DZazyCNKGYAM-/0/1746772961629?e=1791417600&v=beta&t=nLyt8JCXOWAQe5PbX3uB1rxUHLPDjv9cBrKVgyn1PNA"
+                    alt="Finesse" class="club-chip-logo">
                   <strong>Finesse</strong>&thinsp;Finance
                 </a>
                 <a href="https://management.nirmauni.ac.in/student/clique/" target="_blank" rel="noopener noreferrer"
                   class="club-chip" title="Clique - The IT and Analytics Club of IMNU">
-                  <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHs3gFzvt2fxw/company-logo_100_100/company-logo_100_100/0/1714108100335?e=1791417600&v=beta&t=pNc2PeennGAVHtLK7JaauJCcolpbgGrgo78lpbDoQo4" alt="Clique" class="club-chip-logo">
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/D4D0BAQHs3gFzvt2fxw/company-logo_100_100/company-logo_100_100/0/1714108100335?e=1791417600&v=beta&t=pNc2PeennGAVHtLK7JaauJCcolpbgGrgo78lpbDoQo4"
+                    alt="Clique" class="club-chip-logo">
                   <strong>Clique</strong>&thinsp;IT &amp; Analytics
                 </a>
               </div>
@@ -1613,11 +1932,14 @@
         <!-- Top Left: Operations -->
         <article class="domain-quadrant ops">
           <div class="domain-badge">
-            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGQ0NMg3G1KFQ/company-logo_200_200/B4DaB1kn3tI8AE-/0/1788678930277?e=1791417600&v=beta&t=Wjwq16cxvBoEGYPsUzHiLWjbGWLxt0LTnNBACJELK6g" alt="Optimus" class="domain-badge-logo">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D0BAQGQ0NMg3G1KFQ/company-logo_200_200/B4DaB1kn3tI8AE-/0/1788678930277?e=1791417600&v=beta&t=Wjwq16cxvBoEGYPsUzHiLWjbGWLxt0LTnNBACJELK6g"
+              alt="Optimus" class="domain-badge-logo">
             <span class="dot"></span>Operations
           </div>
           <div class="domain-club"><a href="https://management.nirmauni.ac.in/student/optimus/" target="_blank"
-              rel="noopener noreferrer" title="Optimus - The Operations Club of IMNU">Optimus &middot; The Operations Club &nearr;</a></div>
+              rel="noopener noreferrer" title="Optimus - The Operations Club of IMNU">Optimus &middot; The Operations
+              Club &nearr;</a></div>
           <h3 class="domain-title">Digitalising Operations for Competitive Leadership</h3>
           <p class="domain-desc">Transitioning from traditional supply chains to digitally integrated ecosystems:
             embedding smart automation, advanced analytics and data-driven intelligence into core operations.</p>
@@ -1632,11 +1954,14 @@
         <!-- Top Right: Marketing -->
         <article class="domain-quadrant mkt">
           <div class="domain-badge">
-            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGvJzz8JtE1DQ/company-logo_200_200/B4DZdtv7zNHMAI-/0/1749892972246?e=1791417600&v=beta&t=ZlD0gaCBriSTFQHBTWCCbeSrGCFxkEeRY-nZACslSjM" alt="Niche" class="domain-badge-logo">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D0BAQGvJzz8JtE1DQ/company-logo_200_200/B4DZdtv7zNHMAI-/0/1749892972246?e=1791417600&v=beta&t=ZlD0gaCBriSTFQHBTWCCbeSrGCFxkEeRY-nZACslSjM"
+              alt="Niche" class="domain-badge-logo">
             <span class="dot"></span>Marketing
           </div>
           <div class="domain-club"><a href="https://management.nirmauni.ac.in/student/niche/" target="_blank"
-              rel="noopener noreferrer" title="Niche - The Marketing Club of IMNU">Niche &middot; The Marketing Club &nearr;</a></div>
+              rel="noopener noreferrer" title="Niche - The Marketing Club of IMNU">Niche &middot; The Marketing Club
+              &nearr;</a></div>
           <h3 class="domain-title">Achieving Leadership through Technology-Driven Marketing</h3>
           <p class="domain-desc">Leveraging digital innovation, AI-powered insights, and analytics to build enduring
             brands, enhance consumer trust, and position India as a global marketing powerhouse.</p>
@@ -1651,11 +1976,14 @@
         <!-- Bottom Left: Finance -->
         <article class="domain-quadrant fin">
           <div class="domain-badge">
-            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQE_yRiiKGozkQ/img-crop_100/B4DZazyCNKGYAM-/0/1746772961629?e=1791417600&v=beta&t=nLyt8JCXOWAQe5PbX3uB1rxUHLPDjv9cBrKVgyn1PNA" alt="Finesse" class="domain-badge-logo">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D0BAQE_yRiiKGozkQ/img-crop_100/B4DZazyCNKGYAM-/0/1746772961629?e=1791417600&v=beta&t=nLyt8JCXOWAQe5PbX3uB1rxUHLPDjv9cBrKVgyn1PNA"
+              alt="Finesse" class="domain-badge-logo">
             <span class="dot"></span>Finance
           </div>
           <div class="domain-club"><a href="https://management.nirmauni.ac.in/student/finesse/" target="_blank"
-              rel="noopener noreferrer" title="Finesse - The Finance Club of IMNU">Finesse &middot; The Finance Club &nearr;</a></div>
+              rel="noopener noreferrer" title="Finesse - The Finance Club of IMNU">Finesse &middot; The Finance Club
+              &nearr;</a></div>
           <h3 class="domain-title">Financial Leadership in the Era of Intelligent Enterprises</h3>
           <p class="domain-desc">Finance as a strategic catalyst: harnessing AI, advanced analytics, and intelligent
             automation to transform financial planning, capital allocation, and enterprise governance.</p>
@@ -1670,11 +1998,14 @@
         <!-- Bottom Right: HR -->
         <article class="domain-quadrant hr">
           <div class="domain-badge">
-            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQHKqDBJn0esmg/company-logo_200_200/company-logo_200_200/0/1633385435855/imprintz_the_hr_club_of_imnu_logo?e=1791417600&v=beta&t=N_pBh0mUx2ryh-TuiKl77m7LfzPchUix49tJNaGeMwY" alt="Imprintz" class="domain-badge-logo">
+            <img
+              src="https://media.licdn.com/dms/image/v2/C4E0BAQHKqDBJn0esmg/company-logo_200_200/company-logo_200_200/0/1633385435855/imprintz_the_hr_club_of_imnu_logo?e=1791417600&v=beta&t=N_pBh0mUx2ryh-TuiKl77m7LfzPchUix49tJNaGeMwY"
+              alt="Imprintz" class="domain-badge-logo">
             <span class="dot"></span>Human Resources
           </div>
           <div class="domain-club"><a href="https://management.nirmauni.ac.in/student/imprintz/" target="_blank"
-              rel="noopener noreferrer" title="Imprintz - The HR Club of IMNU">Imprintz &middot; The HR Club &nearr;</a></div>
+              rel="noopener noreferrer" title="Imprintz - The HR Club of IMNU">Imprintz &middot; The HR Club &nearr;</a>
+          </div>
           <h3 class="domain-title">Reimagining the Workforce for a Tech-Enabled World</h3>
           <p class="domain-desc">Balancing technological transformation with human-centric leadership: fostering
             adaptability, continuous learning, employee engagement, and ethical technology adoption.</p>
@@ -1691,7 +2022,8 @@
           class="clique-hub" aria-label="Clique: IT and Analytics Club of IMNU"
           title="Clique - The IT and Analytics Club of IMNU">
           <div class="clique-hub-inner">
-            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHs3gFzvt2fxw/company-logo_100_100/company-logo_100_100/0/1714108100335?e=1791417600&v=beta&t=pNc2PeennGAVHtLK7JaauJCcolpbgGrgo78lpbDoQo4"
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D0BAQHs3gFzvt2fxw/company-logo_100_100/company-logo_100_100/0/1714108100335?e=1791417600&v=beta&t=pNc2PeennGAVHtLK7JaauJCcolpbgGrgo78lpbDoQo4"
               alt="Clique"
               style="width:clamp(52px,7vw,88px);height:clamp(52px,7vw,88px);border-radius:50%;object-fit:cover;border:2.5px solid rgba(255,255,255,0.4);margin-bottom:6px;box-shadow:0 2px 12px rgba(0,0,0,0.28);">
             <div class="clique-hub-sub" style="margin-top:0;">IT &amp; Analytics</div>
@@ -1845,8 +2177,8 @@
       <h2>Download the Official Brochure</h2>
       <p>Access complete details on conclave theme, domain sessions, and event schedule.</p>
       <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
-        <a href="assets/UTKRISHTA-26-Brochure.pdf" target="_blank"
-          rel="noopener noreferrer" class="btn-white">Download Brochure (PDF)</a>
+        <a href="assets/UTKRISHTA-26-Brochure.pdf" target="_blank" rel="noopener noreferrer" class="btn-white">Download
+          Brochure (PDF)</a>
         <a href="https://management.nirmauni.ac.in/news-events/" class="btn-white"
           style="background:transparent;color:white;border:2px solid white;" target="_blank"
           rel="noopener noreferrer">View All IMNU Events &rarr;</a>
@@ -1969,6 +2301,37 @@
         document.getElementById('pane-day2').classList.add('active');
       }
     }
+
+    // Hamburger nav toggle
+    (function () {
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('main-nav');
+      if (!toggle || !nav) return;
+
+      toggle.addEventListener('click', function () {
+        const isOpen = nav.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      // Close nav when a link is clicked (smooth scroll UX)
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Close nav on outside click
+      document.addEventListener('click', function (e) {
+        if (!toggle.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
   </script>
 </body>
 
