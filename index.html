@@ -1910,17 +1910,54 @@
     </div>
   </header>
 
-  <!-- Visit Counter (fixed floating badge, bottom-right via visitorbadge.io) -->
-  <a href="https://visitorbadge.io/status?path=clique-imnu%2Futkrishta"
-     target="_blank" rel="noopener noreferrer"
-     title="Total page visitors" class="visit-counter-pill">
+  <!-- Visit Counter: hidden img increments visitorbadge.io, JS reads count from SVG -->
+  <img src="https://api.visitorbadge.io/api/visitors?path=clique-imnu%2Futkrishta&countColor=%23C9963A&style=flat"
+       alt="" width="1" height="1"
+       style="position:absolute;opacity:0;pointer-events:none;"
+       aria-hidden="true">
+
+  <!-- Custom styled pill (same UI as before) -->
+  <div class="visit-counter-pill" title="Total page visitors">
     <span class="visit-counter-dot"></span>
-    <img
-      src="https://api.visitorbadge.io/api/visitors?path=clique-imnu%2Futkrishta&label=Visitors&countColor=%23C9963A&labelColor=%230e323a&style=flat"
-      alt="Visitor count"
-      style="height:20px;border-radius:4px;display:block;"
-      loading="lazy">
-  </a>
+    <span class="visit-counter-icon" style="font-size:14px;">👁</span>
+    <span id="visit-count" class="visit-counter-num">—</span>
+    <span class="visit-counter-label">visits</span>
+  </div>
+
+  <script>
+    (function () {
+      const el = document.getElementById('visit-count');
+      if (!el) return;
+
+      function animateCount(target) {
+        const from = 0;
+        const duration = 1100;
+        const start = performance.now();
+        function step(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.floor(from + (target - from) * ease).toLocaleString();
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      // Fetch the visitorbadge SVG and parse out the count number
+      fetch('https://api.visitorbadge.io/api/visitors?path=clique-imnu%2Futkrishta&countColor=%23C9963A&style=flat')
+        .then(r => r.text())
+        .then(svg => {
+          // Extract all numbers from SVG text elements, take the last one (the count)
+          const matches = svg.match(/>(\d[\d,]*)</g);
+          if (matches && matches.length) {
+            const raw = matches[matches.length - 1].replace(/[^\d]/g, '');
+            const count = parseInt(raw, 10);
+            if (!isNaN(count)) { animateCount(count); return; }
+          }
+          el.textContent = '—';
+        })
+        .catch(() => { el.textContent = '—'; });
+    })();
+  </script>
 
   <!-- ABOUT SECTION -->
   <section class="section" id="about">
